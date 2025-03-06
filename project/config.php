@@ -1,5 +1,5 @@
 <?php 
-$host = 'mysql'
+$host = 'mysql';
 $user = 'root';
 $password = 'lewis254';
 $database = 'auth_system';

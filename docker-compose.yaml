@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # MySQL Database
   mysql:
     image: mysql:8.0
     container_name: mysql
@@ -10,26 +9,24 @@ services:
       MYSQL_DATABASE: auth_system
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Mount the initialization script
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  
     ports:
       - "3306:3306"
     networks:
       - app-network
 
-  # PHP + Apache (using custom Dockerfile)
   web:
-    build: .  # Build the Dockerfile in the current directory
+    build: .
     container_name: php-app
     volumes:
-      - ./project:/var/www/html  # Sync local project files with the container
+      - ./project:/var/www/html  
     ports:
-      - "8080:80"  # Map host port 8080 to container port 80
+      - "8080:80"  
     depends_on:
       - mysql
     networks:
       - app-network
 
-# Volumes and Networks
 volumes:
   mysql_data:
 
